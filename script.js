@@ -82,115 +82,54 @@ function moveUser(){
 
 }
 
-//current css position of the dot div
-let above = document.querySelector('#dot').style.top;
-let left = document.querySelector('#dot').style.left;
-let bottom = document.querySelector('#dot').style.bottom;
-let right = document.querySelector('#dot').style.right;
-
-//moves user position in array
-//move up function
-function moveUp() {
-bottom+= 160;
-let dot = document.querySelector('#dot');
-dot.style.bottom = bottom + "px";
-row--;
-index = mazeArr[row][column];
-walls = checkMove(index);
-}
-//move right function
-function moveRight() {
-left+= 160;
-let dot = document.querySelector('#dot');
-dot.style.left = left + "px";
-column++;
-index = mazeArr[row][column];
-walls = checkMove(index);
-}
-//move down function
-function moveDown() {
-above+= 160;
-let dot = document.querySelector('#dot');
-dot.style.top = above + "px";
-row++;
-index = mazeArr[row][column];
-walls = checkMove(index);
-}
-//move left function
-function moveLeft() {
-right+= 160;
-let dot = document.querySelector('#dot');
-dot.style.right = right + "px";
-column--;
-index = mazeArr[row][column];
-walls = checkMove(index);
+//pass in a string repesenting top, bottom, right, and left style for dot div
+function move(direction) {
+  let dot = document.querySelector('#dot');  
+  console.log("direction: " + direction);
+  const addPixels = 160;
+  const directionStr = dot.style[direction];
+  let directionValue = Number((directionStr.slice(0, directionStr.length - 2 )));
+  directionValue += addPixels;
+  dot.style[direction] = directionValue + "px";
+  console.log("direction updated: " + dot.style[direction]);
+  row--;
+  index = mazeArr[row][column];
+  walls = checkMove(index);
+  moveUser();
 }
 
-
-//loop to run game and countdown moves
-//todo : add the game functions to the loop
-   let movesLeft = 20;
-   document.querySelector('#moves-remaining').textContent = movesLeft;
-
-  // while (isNotFinished) {
-  //   playGame();
-  //   console.log(movesLeft);
-  //   if (row === 0 && column === 5) {
-  //     document.querySelector('#moves-remaining').textContent = 'You made it to the end, Congratulations!';
-  //     isNotFinished === false;
-  //     break;
-  //  } else if (movesLeft <= 0) {
-  //     document.querySelector('#moves-remaining').textContent = 'You ran out of moves!';
-  //     break;
-  //   }
-  // }
-
-
-
-
-//function to play the game
-//function playGame() {
 //create button listeners
 document.querySelector("#up").onclick = function(e){
   debugger;
   console.log('pressed up btn');
-  moveUp();
-  moveUser();
-  movesLeft--;
-  document.querySelector('#moves-remaining').textContent = movesLeft;
-  console.log("row: " + row + " column: " + column + " index: " + index +" walls: " + walls + " moves: " + movesLeft);
+  //moving up so pixels must be added to bottom style
+  move('bottom');
+  console.log("row: " + row + " column: " + column + " index: " + index +" walls: " + walls );
 }
 
 document.querySelector("#right").onclick = function(e){
   debugger;
   console.log('pressed right btn');
-  moveRight();
-  moveUser();
-  movesLeft--;
-  document.querySelector('#moves-remaining').textContent = movesLeft;
-  console.log("row: " + row + " column: " + column + " index: " + index +" walls: " + walls + " moves: " + movesLeft);
+  //moving right so pixels must be added to left style
+  move('left');
+  console.log("row: " + row + " column: " + column + " index: " + index +" walls: " + walls );
 }
 
 document.querySelector("#down").onclick = function(e){
   debugger;
   console.log('pressed down btn');
-  moveDown();
-  moveUser();
-  movesLeft--;
-  document.querySelector('#moves-remaining').textContent = movesLeft;
-  console.log("row: " + row + " column: " + column + " index: " + index +" walls: " + walls + " moves: " + movesLeft);  
+  //moving down so pixels must be added to up style
+  move('top');
+  console.log("row: " + row + " column: " + column + " index: " + index +" walls: " + walls );  
 }
 
 document.querySelector("#left").onclick = function(e){
   debugger;
   console.log('pressed left btn');
-  moveLeft();
-  moveUser();
-  movesLeft--;
-  document.querySelector('#moves-remaining').textContent = movesLeft;
-  console.log("row: " + row + " column: " + column + " index: " + index +" walls: " + walls + " moves: " + movesLeft);
+  //moving left so pixels must be added to right style
+  move('right');
+  console.log("row: " + row + " column: " + column + " index: " + index +" walls: " + walls );
 }
-//}
 
 //todo: add reset() function so after user finished game they can start over
 //Todo: add congrats() function for when finish line is reached
