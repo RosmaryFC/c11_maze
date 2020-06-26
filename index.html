@@ -9,19 +9,25 @@
   <body>
     
     <div class = "game-area">
-     <div id = "dot" ></div>
-     <div class = "moves">
+      <!--TODO: Change Moves Left to timer-->
+     <!-- <div class = "moves">
        <h3>Moves Left<br> <span id = moves-remaining></span></h3>
-    </div>
-    <img id = "maze" src = "https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Fforum.unity.com%2Fattachments%2Fupload_2018-11-28_19-18-20-png.336901%2F" />
+      </div> -->
+      <div id="maze-area">
+        <div id = "dot" ></div>
+        <img id = "maze" src = "assets/maze.png" />
+      </div>
+
+      <!--buttons to move dot around maze-->
+      <div> 
+        <button id = "up">up </button>
+        <button id = "left">left </button>
+        <button id = "right">right</button>
+        <button id ="down">down</button>
+      </div>
+
     </div>
   
-    <div> 
-      <button id = "up">up </button>
-      <button id = "left">left </button>
-      <button id = "right">right</button>
-      <button id ="down">down</button>
-    </div>
 
     <script src="script.js"></script>
   </body>
